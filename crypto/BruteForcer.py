@@ -18,7 +18,7 @@ def bruteforce_accept_request(ja, jr, dont_generate_keys):
         ja_result = LorawanWrapper.testAppKeysWithJoinAccept(valid_keys, ja, dontGenerateKeys= True)
 
         if len(ja_result) > 0:
-            print ("\n**** Key found: %s **** \n"%(ja_result.split()[0]))
+            print ("\n Key found: %s \n"%(ja_result.split()[0]))
 
 
 def bruteforce_two_join_requests(jr1, jr2, dont_generate_keys):
@@ -36,7 +36,7 @@ def bruteforce_two_join_requests(jr1, jr2, dont_generate_keys):
         jr_2_result = LorawanWrapper.testAppKeysWithJoinRequest(valid_keys, jr2, dontGenerateKeys= True)
 
         if len(jr_2_result) > 0:
-            print ("\n**** Key found: %s **** \n"%(jr_2_result.split()[0]))
+            print ("\n Key found: %s \n"%(jr_2_result.split()[0]))
 
 def bruteforce_two_join_accepts(ja1, ja2, dont_generate_keys):
     global keys
@@ -102,7 +102,7 @@ if __name__ == '__main__':
                                     help= "Packet in Base64 format (JoinRequest/JoinAccept) to be bruteforced. eg. -s AMQAAAAAhQAAAgAAAAAAAADcYldcgbc=",
                                     required = True)
         parser.add_argument("-k", "--keys",
-                            help = "File containing a list of keys, separated by \\n. Will use /auditing/analyzers/bruteForcer/keys.txt by default",
+                            help = "File containing a list of keys",
                             default = "dictionary/keys.txt")           
         parser.add_argument("--dont-generate",
                             action= "store_true",
