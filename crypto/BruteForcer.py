@@ -1,6 +1,3 @@
-# LoRaWAN Security Framework - BruteForcer.py
-# Copyright (c) 2019 IOActive Inc.  All rights reserved.
-
 import argparse, base64,sys
 import lorawanwrapper.LorawanWrapper as LorawanWrapper
 
@@ -96,11 +93,6 @@ def error_message(packet_order):
 if __name__ == '__main__':
 
     try:
-        print ("\n*****************************************************")
-        print ("LoRaWAN Security Framework - %s"%(sys.argv[0]))
-        print ("Copyright (c) 2019 IOActive Inc.  All rights reserved.")
-        print ("*****************************************************\n")
-
         parser = argparse.ArgumentParser(description='This script receives 2 JoinAccepts, 2 JoinRequests or a pair or JoinRequest/JoinAccept in Base64 and tries to decrypt its AppKey with a set of possible keys which can be provided in a file or can be generated on the fly.')
         requiredGroup = parser.add_argument_group('Required arguments')
         requiredGroup.add_argument("-f", "--first",
