@@ -103,7 +103,7 @@ if __name__ == '__main__':
                                     required = True)
         parser.add_argument("-k", "--keys",
                             help = "File containing a list of keys, separated by \\n. Will use /auditing/analyzers/bruteForcer/keys.txt by default",
-                            default = "../../auditing/analyzers/bruteforcer/keys.txt")           
+                            default = "dictionary/keys.txt")           
         parser.add_argument("--dont-generate",
                             action= "store_true",
                             help = "Select this options if you don't want to generate keys on the fly with the following combinations:\n 1- Combine the first byte and the last fifteeen bytes. eg. AABBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n 2- Combine even and odd bytes position equally. eg. AABBAABBAABBAABBAABBAABBAABBAABB\n 3- The first 14 bytes in 00 and combine the last 2. eg. 0000000000000000000000000000BA01",
