@@ -55,7 +55,7 @@ OBJDUMP = $(TARGET)objdump
 GDB 	= $(TARGET)gdb
 
 # Folder of armapi
-ARMAPI = ../../../bindings/c
+ARMAPI =bindings/c
 
 #################################
 # Start define flags
