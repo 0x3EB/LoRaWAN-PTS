@@ -1,7 +1,7 @@
 from network import LoRa
 import time
 import binascii
-import socket 
+import socket
 
 def send_tomuch_message():
     i = 0
@@ -23,7 +23,7 @@ def send_tomuch_message():
 lora = LoRa(mode=LoRa.LORAWAN,region=LoRa.EU868)
 
 app_eui = binascii.unhexlify('70B3D57ED003C0E9')
-app_key = binascii.unhexlify('674D6B3050B39D82AE946DFC9AB4DCBB')
+app_key = binascii.unhexlify('DB1D29A8BAE112E22A50370B378BCD17')
 
 lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
 
@@ -41,7 +41,7 @@ s.setblocking(False)
 s.send(bytes([1, 2, 3]))
 print('Message sent')
 
-send_tomuch_message()
+#send_tomuch_message()
 
 ### Receive Message ###
 """
