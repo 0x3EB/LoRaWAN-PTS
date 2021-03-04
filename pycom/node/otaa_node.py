@@ -1,21 +1,38 @@
 #!/usr/bin/env python
-#
-# Copyright (c) 2019, Pycom Limited.
-#
-# This software is licensed under the GNU GPL version 3 or any
-# later version, with permitted additional terms. For more information
-# see the Pycom Licence v1.0 document supplied with this file, or
-# available at https://www.pycom.io/opensource/licensing
-#
 
-""" OTAA Node example compatible with the LoPy Nano Gateway """
+
+### Configuration ###
+
+import machine
+import ubinascii
+
+WIFI_MAC = ubinascii.hexlify(machine.unique_id()).upper()
+# Set  the Gateway ID to be the first 3 bytes of MAC address + 'FFFE' + last 3 bytes of MAC address
+GATEWAY_ID = WIFI_MAC[:6] + "FFFE" + WIFI_MAC[6:12]
+
+SERVER = 'router.eu.thethings.network'
+PORT = 1700
+
+NTP = "fr.pool.ntp.org" #"pool.ntp.org"
+NTP_PERIOD_S = 350
+
+WIFI_SSID = 'OnePlus7T' # my wifi
+WIFI_PASS = '123456789' # my wifi password
+
+# for EU868
+LORA_FREQUENCY = 868100000
+LORA_GW_DR = "SF7BW125" # DR_5
+LORA_NODE_DR = 5
+
+
+
+### OTAA Node ###
 
 from network import LoRa
 import socket
 import binascii
 import struct
 import time
-import config
 
 # initialize LoRa in LORAWAN mode.
 # Please pick the region that matches where you are using the device:
@@ -26,17 +43,17 @@ import config
 lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
 
 # create an OTA authentication params
-dev_eui = binascii.unhexlify('AABBCCDDEEFF7778')
-app_eui = binascii.unhexlify('70B3D57EF0003BFD')
-app_key = binascii.unhexlify('36AB7625FE770B6881683B495300FFD6')
+dev_eui = binascii.unhexlify('70B3D5499CCFCD77')
+app_eui = binascii.unhexlify('70B3D57ED003C0E9')
+app_key = binascii.unhexlify('DB1D29A8BAE112E22A50370B378BCD17')
 
 # set the 3 default channels to the same frequency (must be before sending the OTAA join request)
-lora.add_channel(0, frequency=config.LORA_FREQUENCY, dr_min=0, dr_max=5)
-lora.add_channel(1, frequency=config.LORA_FREQUENCY, dr_min=0, dr_max=5)
-lora.add_channel(2, frequency=config.LORA_FREQUENCY, dr_min=0, dr_max=5)
+lora.add_channel(0, frequency= LORA_FREQUENCY, dr_min=0, dr_max=5)
+lora.add_channel(1, frequency= LORA_FREQUENCY, dr_min=0, dr_max=5)
+lora.add_channel(2, frequency= LORA_FREQUENCY, dr_min=0, dr_max=5)
 
 # join a network using OTAA
-lora.join(activation=LoRa.OTAA, auth=(dev_eui, app_eui, app_key), timeout=0, dr=config.LORA_NODE_DR)
+lora.join(activation=LoRa.OTAA, auth=(dev_eui, app_eui, app_key), timeout=0, dr= LORA_NODE_DR)
 
 # wait until the module has joined the network
 while not lora.has_joined():
@@ -51,7 +68,7 @@ for i in range(3, 16):
 s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
 
 # set the LoRaWAN data rate
-s.setsockopt(socket.SOL_LORA, socket.SO_DR, config.LORA_NODE_DR)
+s.setsockopt(socket.SOL_LORA, socket.SO_DR,  LORA_NODE_DR)
 
 # make the socket non-blocking
 s.setblocking(False)

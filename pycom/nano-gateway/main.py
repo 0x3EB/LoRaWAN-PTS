@@ -1,17 +1,7 @@
 #!/usr/bin/env python
-#
-# Copyright (c) 2019, Pycom Limited.
-#
-# This software is licensed under the GNU GPL version 3 or any
-# later version, with permitted additional terms. For more information
-# see the Pycom Licence v1.0 document supplied with this file, or
-# available at https://www.pycom.io/opensource/licensing
-#
 
 
-
-
-""" LoPy LoRaWAN Nano Gateway. Can be used for both EU868 and US915. """
+### Configuration ###
 
 import errno
 import machine
@@ -85,6 +75,9 @@ TX_ACK_PK = {
     }
 }
 
+
+
+### LoPy LoRaWAN Nano Gateway ###
 
 class NanoGateway:
     """
@@ -470,9 +463,7 @@ class NanoGateway:
 
 
 
-
-
-""" JAI MIS LA CONFIG ICI CAR IL Y AVAIT UN IMPORT ERROR """
+### Main code ###
 
 import machine
 import ubinascii
@@ -484,8 +475,8 @@ GATEWAY_ID = WIFI_MAC[:6] + "FFFE" + WIFI_MAC[6:12]
 SERVER = 'router.eu.thethings.network'
 PORT = 1700
 
-NTP = "eu.pool.ntp.org" #"pool.ntp.org"
-NTP_PERIOD_S = 3600
+NTP = "fr.pool.ntp.org" #"pool.ntp.org"
+NTP_PERIOD_S = 350
 
 WIFI_SSID = 'OnePlus7T' # my wifi
 WIFI_PASS = '123456789' # my wifi password
@@ -497,13 +488,7 @@ LORA_NODE_DR = 5
 
 
 
-
-
-
-""" LoPy LoRaWAN Nano Gateway example usage """
-
-#import config
-#from nanogateway import NanoGateway
+### Example ###
 
 if __name__ == '__main__':
     nanogw = NanoGateway(
